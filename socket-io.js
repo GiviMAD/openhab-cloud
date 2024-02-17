@@ -443,7 +443,7 @@ function SocketIO(server, system) {
         } else {
             const cb = () => {
                 if (pending.length) {
-                    _writeToSocket(stream, pending.shift(), cb);
+                    process.nextTick(()=> _writeToSocket(stream, pending.shift(), cb));
                 } else {
                     stream[WritingState] = false;
                 }
